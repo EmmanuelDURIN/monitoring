@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Monitoring"
-        xmlns:ViewModels="clr-namespace:Monitoring.ViewModels" x:Class="Monitoring.MainWindow"
+        xmlns:ViewModels="clr-namespace:Monitoring.ViewModels" xmlns:Converters="clr-namespace:Monitoring.Converters" x:Class="Monitoring.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" d:DataContext="{d:DesignInstance {x:Type ViewModels:MainViewModel}}">
     <Window.Resources>
+        <Converters:BoolToBrushConverter x:Key="boolToBrushConverter1"  />
+        <Converters:BoolToBrushConverter x:Key="boolToBrushConverter2" PositiveBrush="Yellow" NegativeBrush="Purple" />
+        <Converters:BoolToBrushConverter x:Key="boolToBrushConverter3" PositiveBrush="Orange" NegativeBrush="Blue" />
         <DataTemplate x:Key="machineTemplate">
             <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="3" >
                 <Grid Margin="10" Width="120">
@@ -17,13 +20,14 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <Ellipse Width="7" Height="7" Margin="3" Fill="#FF00c000" />
-                        <TextBlock>
-                        <Run  Text="{Binding Name}" FontWeight="Bold" />
-                        <Run Text="(" FontStyle="Italic" />
-                        <Run Text="{Binding Priority}" />
-                        <Run Text=")" />
-                    </TextBlock>
+                        <Ellipse Width="7" Height="7" Margin="3"
+                                 Fill="{Binding IsConnected, Converter={StaticResource boolToBrushConverter1}}" />
+                        <Ellipse Width="7" Height="7" Margin="3"
+                                 Fill="{Binding HasSession, Converter={StaticResource boolToBrushConverter2}}" />
+                        <Ellipse Width="7" Height="7" Margin="3"
+                                 Fill="{Binding IsWorking, Converter={StaticResource boolToBrushConverter3}}" />
+
+                        <TextBlock><Run  Text="{Binding Name}" FontWeight="Bold" /><Run Text=" "/><Run Text="(" FontStyle="Italic" /><Run Text=" "/><Run Text="{Binding Priority}" /><Run Text=" "/><Run Text=")" /></TextBlock>
                     </StackPanel>
                     <TextBlock Text="{Binding IpAddress}" Grid.Row="1"/>
                     <TextBlock Text="{Binding MacAddress}" Grid.Row="2"/>

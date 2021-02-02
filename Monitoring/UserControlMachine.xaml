@@ -44,7 +44,7 @@
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="29*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="textBoxMac" Text="{Binding MacBAddress}"  Grid.Column="1" />
+                <TextBox x:Name="textBoxMac" Text="{Binding MacAddress}"  Grid.Column="1" />
                 <Label Content="_Mac :" Target="{Binding ElementName=textBoxMac}" />
             </Grid>
         </Expander>

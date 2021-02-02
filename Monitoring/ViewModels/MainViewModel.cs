@@ -36,7 +36,13 @@ namespace Monitoring.ViewModels
             machines = new ObservableCollection<Machine>();
             IEnumerable<Machine> query = Enumerable
                                 .Range(1, 10)
-                                .Select(i => new Machine { IpAddress = "192.168.1." + i, Name = "Computer" + i })
+                                .Select(i => 
+                                new Machine
+                                {
+                                    IpAddress = "192.168.1." + i,
+                                    Name = "Computer" + i,
+                                    IsConnected=i%2==0 
+                                });
                                 ;
             foreach (var machine in query)
             {

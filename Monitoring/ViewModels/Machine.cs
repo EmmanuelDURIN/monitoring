@@ -38,12 +38,23 @@ namespace Monitoring.ViewModels
                 SetProperty(ref ipAddress, value);
             }
         }
-        public string MacBAddress
+        public string MacAddress
         {
             get { return macAddress; }
             set
             {
                 SetProperty(ref macAddress, value);
+            }
+        }
+
+        private bool isConnected;
+
+        public bool IsConnected
+        {
+            get { return isConnected; }
+            set
+            {
+                SetProperty(ref isConnected, value);
             }
         }
     }
