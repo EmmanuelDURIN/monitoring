@@ -52,7 +52,13 @@
             -->
             <ListBox ItemTemplate="{DynamicResource machineTemplate}" ItemsSource="{Binding Machines}"
                      SelectedItem="{Binding SelectedMachine}"
-                     Margin="10" ></ListBox>
+                     Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
             <GridSplitter Width="10" Background="#FF102080" HorizontalAlignment="Center" Grid.Column="1"/>
             <local:UserControlMachine DataContext="{Binding SelectedMachine}"  Grid.Column="2" />
         </Grid>
