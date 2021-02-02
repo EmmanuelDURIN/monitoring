@@ -35,7 +35,7 @@
         <Label Content="_Name :" Target="{x:Reference textBoxName}" Grid.Row="1" />
         <Label Content="_Priority :" Target="{x:Reference textBoxPriority}" Grid.Row="2" />
         <DockPanel Grid.Column="1" Grid.Row="2">
-            <TextBox x:Name="textBoxPriority" Text="{Binding Priority}" DockPanel.Dock="Left" />
+            <TextBox x:Name="textBoxPriority" Text="{Binding Priority, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left" />
             <Slider Width="100" Minimum="0" Maximum="10" HorizontalAlignment="Left" Value="{Binding Priority}" />
         </DockPanel>
         <Expander Header="Advanced" IsExpanded="True" Grid.Row="3" Grid.ColumnSpan="2" >

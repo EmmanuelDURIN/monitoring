@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Monitoring.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace Monitoring
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Bonne pratique : ViewModel membre de classe
+        private MainViewModel viewModel = new MainViewModel();
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
