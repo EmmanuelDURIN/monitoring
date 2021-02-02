@@ -42,7 +42,8 @@ namespace Monitoring
                 ///   2) mettre des expressions {machine.Name} plutôt que ds numéros {0}
                 ///  Référence formatage
                 ///            https://dzone.com/refcardz/coredotnet?chapter=3
-                MessageBox.Show($"Machine : {machine.Name} {machine.Priority:000}");
+                //MessageBox.Show($"Machine : {machine.Name} {machine.Priority:000}");
+                viewModel.Machines.Add(machine);
             }
         }
     }
