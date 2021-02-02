@@ -24,5 +24,22 @@ namespace Monitoring
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddMachineWindow window = new AddMachineWindow();
+            bool? result = window.ShowDialog();
+            if ( result == true)
+            {
+                var machine = window.Machine;
+                // machine added
+                // Interpolation string :
+                ///   1) mettre un $
+                ///   2) mettre des expressions {machine.Name} plutôt que ds numéros {0}
+                ///  Référence formatage
+                ///            https://dzone.com/refcardz/coredotnet?chapter=3
+                MessageBox.Show($"Machine : {machine.Name} {machine.Priority:000}");
+            }
+        }
     }
 }
