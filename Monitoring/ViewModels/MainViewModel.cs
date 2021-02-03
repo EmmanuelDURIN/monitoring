@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -31,12 +30,22 @@ namespace Monitoring.ViewModels
         SetProperty(ref machines, value);
       }
     }
+    /// micro : envoie l'ordre d'annulation : Source de l'événement
+    private CancellationTokenSource cancellationTokenSource;
     public MainViewModel()
     {
       // RefreshCmd = new RelayCommand(Refresh, o => !IsRefreshing);
       // les lambdas sont très utiles pour adapter les protos de fonction
       RefreshCmd = new RelayCommand(o => Refresh(), CanRefresh);
+      CancelCmd = new RelayCommand(o => Cancel(), o => IsRefreshing);
       Refresh();
+    }
+    private void Cancel()
+    {
+      // inutile avec ?.
+      //if (cancellationTokenSource != null)
+      cancellationTokenSource?.Cancel();
+      //string noVoie = personne?.Adresse?.Voie;
     }
     private bool CanRefresh(object obj)
     {
@@ -44,18 +53,25 @@ namespace Monitoring.ViewModels
     }
     private async void Refresh()
     {
+      cancellationTokenSource = new CancellationTokenSource();
+      // l'écouteur de l'ordre d'annulation
+      CancellationToken cancellationToken = cancellationTokenSource.Token;
+
       IsRefreshing = true;
       try
       {
         Machines = new ObservableCollection<Machine>();
         // Bloque le thread graphique
         //Thread.Sleep(3000);
-        Task refreshTask = Task.Delay(3000);
+
+        // les meilleures méthodes async acceptent un CancellationToken
+        Task refreshTask = Task.Delay(3000, cancellationToken);
         // Bloque le thread graphique
         //refreshTask.Wait();
         // await attend avant d'exécuter l'instruction suivante
         // mais ne bloque graphique
         await refreshTask;
+        
         IEnumerable<Machine> query = Enumerable
                             .Range(1, 10)
                             // lambda expression = fonction anonyme, comparable à
@@ -69,6 +85,10 @@ namespace Monitoring.ViewModels
                             });
         foreach (var machine in query)
           Machines.Add(machine);
+      }
+      catch (TaskCanceledException )
+      {
+        // annulation en appuyant sur Cancel
       }
       finally
       {
@@ -87,9 +107,11 @@ namespace Monitoring.ViewModels
         {
           // Dire à la cmd qu'elle a changé d'état
           RefreshCmd.FireExecuteChanged();
+          CancelCmd.FireExecuteChanged();
         }
       }
     }
     public RelayCommand RefreshCmd { get; set; }
+    public RelayCommand CancelCmd { get; set; }
   }
 }
