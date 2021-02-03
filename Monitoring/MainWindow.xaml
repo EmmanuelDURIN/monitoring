@@ -9,11 +9,11 @@
         Title="MainWindow" Height="450" Width="800" d:DataContext="{d:DesignInstance {x:Type ViewModels:MainViewModel}}">
     <Window.Resources>
         <Converters:BoolToBrushConverter x:Key="boolToBrushConverter1"  />
-        <Converters:BoolToBrushConverter x:Key="boolToBrushConverter2" PositiveBrush="Yellow" NegativeBrush="Purple" />
-        <Converters:BoolToBrushConverter x:Key="boolToBrushConverter3" PositiveBrush="Orange" NegativeBrush="Blue" />
+        <Converters:BoolToBrushConverter x:Key="boolToBrushConverter2" PositiveBrush="Yellow" NegativeBrush="Green" />
+        <Converters:BoolToBrushConverter x:Key="boolToBrushConverter3" PositiveBrush="Orange" NegativeBrush="Green" />
         <DataTemplate x:Key="machineTemplate">
             <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="3" >
-                <Grid Margin="10" Width="120">
+                <Grid Margin="10" Width="130">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
@@ -27,7 +27,8 @@
                         <Ellipse Width="7" Height="7" Margin="3"
                                  Fill="{Binding IsWorking, Converter={StaticResource boolToBrushConverter3}}" />
 
-                        <TextBlock><Run  Text="{Binding Name}" FontWeight="Bold" /><Run Text=" "/><Run Text="(" FontStyle="Italic" /><Run Text=" "/><Run Text="{Binding Priority}" /><Run Text=" "/><Run Text=")" /></TextBlock>
+                        <TextBlock Margin=" 5 2"><Run  Text="{Binding Name}" FontWeight="Bold" />
+                            <Run Text="(" FontStyle="Italic" /><Run Text="{Binding Priority}" /><Run Text=")" /></TextBlock>
                     </StackPanel>
                     <TextBlock Text="{Binding IpAddress}" Grid.Row="1"/>
                     <TextBlock Text="{Binding MacAddress}" Grid.Row="2"/>

@@ -57,5 +57,25 @@ namespace Monitoring.ViewModels
                 SetProperty(ref isConnected, value);
             }
         }
+    private bool hasSession;
+
+    public bool HasSession
+    {
+      get { return hasSession; }
+      set
+      {
+        SetProperty(ref hasSession, value);
+      }
     }
+    private bool isWorking;
+
+    public bool IsWorking
+    {
+      get { return isWorking; }
+      set
+      {
+        SetProperty(ref isWorking, value);
+      }
+    }
+  }
 }
