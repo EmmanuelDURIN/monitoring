@@ -71,7 +71,7 @@ namespace Monitoring.ViewModels
         // await attend avant d'exécuter l'instruction suivante
         // mais ne bloque graphique
         await refreshTask;
-        
+
         IEnumerable<Machine> query = Enumerable
                             .Range(1, 10)
                             // lambda expression = fonction anonyme, comparable à
@@ -86,7 +86,7 @@ namespace Monitoring.ViewModels
         foreach (var machine in query)
           Machines.Add(machine);
       }
-      catch (TaskCanceledException )
+      catch (TaskCanceledException)
       {
         // annulation en appuyant sur Cancel
       }
@@ -108,9 +108,19 @@ namespace Monitoring.ViewModels
           // Dire à la cmd qu'elle a changé d'état
           RefreshCmd.FireExecuteChanged();
           CancelCmd.FireExecuteChanged();
+          // Dans le cas d'une propriété dérivée
+          // il faut émettre des événements pour dire que
+          // les propriétés dérivées ont changées
+          OnPropertyChanged(nameof(IsNotRefreshing));
         }
       }
     }
+    // Propriété dérivée, calculée
+    public bool IsNotRefreshing
+    {
+      get { return !isRefreshing; }
+    }
+
     public RelayCommand RefreshCmd { get; set; }
     public RelayCommand CancelCmd { get; set; }
   }

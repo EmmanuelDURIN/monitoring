@@ -68,7 +68,16 @@
                 </ListBox.ItemsPanel>
             </ListBox>
             <GridSplitter Width="10" Background="#FF102080" HorizontalAlignment="Center" Grid.Column="1"/>
-            <local:UserControlMachine DataContext="{Binding SelectedMachine}"  Grid.Column="2" />
+            <!--possibilité de changer le DataContext-->
+            <!--<local:UserControlMachine DataContext="{Binding SelectedMachine}" 
+                                      IsEnabled="{Binding DataContext.IsNotRefreshing, 
+            ²                         RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                      Grid.Column="2" />-->
+            <Border IsEnabled="{Binding IsNotRefreshing}" Margin="10" BorderBrush="#FF000080" 
+                    BorderThickness="1" CornerRadius="3" Padding="10"
+                    Grid.Column="2">
+                <local:UserControlMachine DataContext="{Binding SelectedMachine}" />
+            </Border>
         </Grid>
     </Grid>
 </Window>
