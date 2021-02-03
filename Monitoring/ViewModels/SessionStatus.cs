@@ -1,4 +1,4 @@
-﻿namespace Monitoring
+﻿namespace Monitoring.ViewModels
 {
     public enum SessionStatus
     {

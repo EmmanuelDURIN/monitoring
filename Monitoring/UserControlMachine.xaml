@@ -4,15 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Monitoring"
-             xmlns:ViewModels="clr-namespace:Monitoring.ViewModels" x:Class="Monitoring.UserControlMachine"
+             xmlns:ViewModels="clr-namespace:Monitoring.ViewModels"
+             xmlns:validations="clr-namespace:Monitoring.Validations"
+             x:Class="Monitoring.UserControlMachine"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" 
              d:DataContext="{d:DesignInstance {x:Type ViewModels:Machine}}">
     <UserControl.Resources>
         <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Margin" Value="10 3" />
+            <Setter Property="Margin" Value="10 3 0 20" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Width" Value="100" />
+            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},
+         Path=(Validation.Errors)[0].ErrorContent}" />
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <!-- Placeholder for the TextBox itself -->
+                            <Border BorderBrush="Red" BorderThickness="1" >
+                                <AdornedElementPlaceholder x:Name="textBox"/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -29,7 +46,16 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="29*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="textBoxIp" Text="{Binding IpAddress}"  Grid.Column="1" />
+        <TextBox x:Name="textBoxIp" Grid.Column="1" 
+        ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" >
+            <TextBox.Text>
+                <Binding Path="IpAddress" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validations:IpAddressValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="_Ip Address :" Target="{Binding ElementName=textBoxIp}" />
         <TextBox x:Name="textBoxName" Text="{Binding Name}" Grid.Row="1" Grid.Column="1" />
         <Label Content="_Name :" Target="{x:Reference textBoxName}" Grid.Row="1" />
