@@ -43,6 +43,8 @@
         </Grid.RowDefinitions>
         <Grid x:Name="gridButtonbar">
             <Button Content="Add machine..." Padding="10 3" HorizontalAlignment="Left" Margin="34,29,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+            <Button Content="_Refresh" Command="{Binding RefreshCmd}" Padding="10 3" HorizontalAlignment="Left" Margin="182,29,0,0" VerticalAlignment="Top" Width="97"/>
+            <ProgressBar IsIndeterminate="{Binding IsRefreshing}"  HorizontalAlignment="Left" Height="10" Margin="312,31,0,0" VerticalAlignment="Top" Width="153"/>
         </Grid>
         <Grid x:Name="gridContent" Grid.Row="1">
             <Grid.ColumnDefinitions>
