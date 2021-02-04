@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 namespace Monitoring
 {
@@ -6,10 +7,10 @@ namespace Monitoring
   /// Interaction logic for UserControlMachine.xaml
   /// </summary>
   public partial class UserControlMachine : UserControl
+  {
+    public UserControlMachine()
     {
-        public UserControlMachine()
-        {
-            InitializeComponent();
-        }
+      InitializeComponent();
     }
+  }
 }

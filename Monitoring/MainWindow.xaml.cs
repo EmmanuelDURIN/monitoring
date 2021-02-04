@@ -46,5 +46,5 @@ namespace Monitoring
                 viewModel.Machines.Add(machine);
             }
         }
-    }
+  }
 }

@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:Monitoring"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/StandardResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="blueBackground" Color="#FF102080"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

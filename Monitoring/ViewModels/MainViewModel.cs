@@ -51,6 +51,10 @@ namespace Monitoring.ViewModels
     {
       return !IsRefreshing;
     }
+    // une fonction async peut avoir 3 types de retour :
+    // 1) Task (éq. void) - bien  parce que permet la transmission des exceptions
+    // 2) Task<T>  (éq. T) - bien 
+    // 3) void - moins bien sauf si c'est une callback
     private async void Refresh()
     {
       cancellationTokenSource = new CancellationTokenSource();

@@ -42,7 +42,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid x:Name="gridButtonbar">
-            <Button Content="Add machine..." Padding="10 3" HorizontalAlignment="Left" Margin="34,29,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+            <Button Content="Add machine..." Width="{DynamicResource standardButtonWidth}" Padding="10 3" HorizontalAlignment="Left" Margin="34,29,0,0" VerticalAlignment="Top" Click="Button_Click"/>
             <Button Content="_Refresh" Command="{Binding RefreshCmd}" Padding="10 3" HorizontalAlignment="Left" Margin="182,29,0,0" VerticalAlignment="Top" Width="97"/>
             <ProgressBar IsIndeterminate="{Binding IsRefreshing}"  HorizontalAlignment="Left" Height="10" Margin="527,31,0,0" VerticalAlignment="Top" Width="153"/>
             <Button Content="_Cancel" Command="{Binding CancelCmd}" Padding="10 3" HorizontalAlignment="Left" Margin="313,31,0,0" VerticalAlignment="Top" Width="97"/>
@@ -67,13 +67,14 @@
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
-            <GridSplitter Width="10" Background="#FF102080" HorizontalAlignment="Center" Grid.Column="1"/>
+            <GridSplitter Width="10" Background="{DynamicResource blueBackground}" HorizontalAlignment="Center" Grid.Column="1"/>
             <!--possibilité de changer le DataContext-->
             <!--<local:UserControlMachine DataContext="{Binding SelectedMachine}" 
                                       IsEnabled="{Binding DataContext.IsNotRefreshing, 
             ²                         RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
                                       Grid.Column="2" />-->
-            <Border IsEnabled="{Binding IsNotRefreshing}" Margin="10" BorderBrush="#FF000080" 
+            <Border IsEnabled="{Binding IsNotRefreshing}" Margin="10"
+                    BorderBrush="{DynamicResource blueBackground}" 
                     BorderThickness="1" CornerRadius="3" Padding="10"
                     Grid.Column="2">
                 <local:UserControlMachine DataContext="{Binding SelectedMachine}" />
