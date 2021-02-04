@@ -64,6 +64,7 @@ namespace Monitoring.ViewModels
       IsRefreshing = true;
       try
       {
+        // TODO : stopper les vieilles machines
         Machines = new ObservableCollection<Machine>();
         // Bloque le thread graphique
         //Thread.Sleep(3000);
@@ -77,7 +78,7 @@ namespace Monitoring.ViewModels
         await refreshTask;
 
         IEnumerable<Machine> query = Enumerable
-                            .Range(1, 10)
+                            .Range(1, 1000)
                             // lambda expression = fonction anonyme, comparable à
                             // f(x) : x -> x²+2
                             .Select(i =>
@@ -88,7 +89,11 @@ namespace Monitoring.ViewModels
                               IsConnected = i % 2 == 0
                             });
         foreach (var machine in query)
+        {
+
           Machines.Add(machine);
+          machine.StartMonitoring();
+        }
       }
       catch (TaskCanceledException)
       {
