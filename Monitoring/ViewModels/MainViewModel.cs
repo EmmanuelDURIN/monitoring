@@ -64,7 +64,7 @@ namespace Monitoring.ViewModels
       IsRefreshing = true;
       try
       {
-        // TODO : stopper les vieilles machines
+        StopMachines();
         Machines = new ObservableCollection<Machine>();
         // Bloque le thread graphique
         //Thread.Sleep(3000);
@@ -104,6 +104,17 @@ namespace Monitoring.ViewModels
         IsRefreshing = false;
       }
     }
+
+    private void StopMachines()
+    {
+      if (Machines == null)
+        return;
+      foreach (var machine in Machines)
+      {
+        machine.StopMonitoring();
+      }
+    }
+
     private bool isRefreshing;
 
     public bool IsRefreshing

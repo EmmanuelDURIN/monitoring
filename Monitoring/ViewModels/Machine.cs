@@ -90,7 +90,6 @@ namespace Monitoring.ViewModels
     internal void StopMonitoring()
     {
       machineWatcher.Stop();
-
     }
   }
 }
